@@ -19,6 +19,13 @@ O objetivo desta versão foi limpar o código (Clean Code), tornando-o mais efic
 * **UX (Experiência do Usuário):** Adição de símbolos monetários ($, €, £) nos resultados.
 * **Tratamento de Erros:** Melhoria no `try/except` para capturar entradas inválidas e chaves de dicionário inexistentes.
 
+### Versão 1.2: Conversão Bidirecional (Ida e Volta)
+Esta atualização focou na flexibilidade matemática e na integridade dos dados, permitindo conversões de e para a moeda nacional.
+* **Fluxo Bidirecional:** Implementação da lógica para converter **Real Brasileiro → Moeda Estrangeira**, além do fluxo original.
+* **Lógica Matemática Inversa:** Aplicação automática de **divisão** quando a origem é Real, e **multiplicação** quando a origem é estrangeira.
+* **Otimização de Dicionários:** Reutilização das taxas existentes invertendo a busca das chaves `[origem, destino]` para `[destino, origem]` quando necessário, evitando a duplicação de dados manuais.
+* **Expansão de Dados:** Inclusão completa do "Real Brasileiro" (ID 6) e seu símbolo (R$) em todas as estruturas de dados para evitar erros de chave (`KeyError`).
+
 ## 🛠️ Tecnologias Utilizadas
 * Python 3
 * Estruturas de Dados: Listas, Dicionários, Tuplas
