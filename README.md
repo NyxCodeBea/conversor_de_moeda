@@ -1,4 +1,4 @@
-# 💱 Conversor de Moedas (Python)
+# 💱 Conversor de Moedas
 
 Este projeto é um sistema de conversão de moedas via linha de comando (CLI), desenvolvido para praticar lógica de programação, manipulação de dados e estruturação de código em Python.
 
