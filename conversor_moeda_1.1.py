@@ -1,9 +1,7 @@
 # --- 1. Configurações e Dados ---
 
-valor_converter = 0
-valor_convertido = 0
-
-moeda_conversao = {
+# Dicionário de Nomes (A Agenda)
+nomes_moedas = {
     1: "Dólar Americano",
     2: "Euro",
     3: "Libra Esterlina",
@@ -11,31 +9,47 @@ moeda_conversao = {
     5: "Won sul-coreano"
 }
 
+# Dicionário de Taxas (A Tabela de Preços)
 taxas_conversao = {
-    (1, 1): 5.38,   # Dólar Americano para Real Brasileiro
-    (2, 1): 5.90,   # Euro para Real Brasileiro
-    (3, 1): 6.80,   # Libra Esterlina para Real Brasileiro
-    (4, 1): 0.78,   # Yuan Chinês para Real Brasileiro
-    (5, 1): 0.0042  # Won sul-coreano para Real Brasileiro
+    (1, 1): 5.38,   # Dólar -> Real
+    (2, 1): 5.90,   # Euro -> Real
+    (3, 1): 6.80,   # Libra -> Real
+    (4, 1): 0.78,   # Yuan -> Real
+    (5, 1): 0.0042  # Won -> Real
 }
 
-moeda_convertida = {
+# Dicionário de Símbolos
+simbolos_moedas = {
+    1: "$",   # Dólar
+    2: "€",   # Euro
+    3: "£",   # Libra
+    4: "¥",   # Yuan
+    5: "₩"    # Won
+}
+
+# Nome da moeda de destino (Fixo no Real por enquanto)
+nomes_destino = {
     1: "Real Brasileiro"
 }
 
+def conversor_moeda(valor, id_origem, id_destino): 
+    # Agora a função recebe tudo o que precisa para trabalhar!
+    
+    # 1. Busca a taxa usando a TUPLA (origem, destino)
+    # Exemplo: Se id_origem for 2 e id_destino for 1, busca (2, 1)
+    taxa = taxas_conversao[id_origem, id_destino]
+    
+    # 2. Busca o nome da moeda e simbolos
+    nome_origem = nomes_moedas[id_origem]
+    nome_destino = nomes_destino[id_destino]
+    simbolo_origem = simbolos_moedas[id_origem]
 
-id_moeda = []
+    # 3. Faz o cálculo
+    valor_final = valor * taxa
 
-def conversor_moeda_rb(valor_converter,moeda_conversao,): 
-
-    taxa = taxas_conversao[id_moeda, moeda_convertida]
-    nome_moeda = moeda_conversao[id_moeda]
-
-    valor_convertido = float(valor_converter * taxa) 
-
-    print(f"Quanto vale $ {valor_converter:.2f} {nome_moeda} em {moeda_convertida}?")
-    print(f"$ {valor_converter:.2f} == R$ {valor_convertido:.2f}")
-    print(f"Resultado: R$ {valor_convertido:.2f}")
+    # 4. Mostra o resultado
+    print(f"Quanto vale {simbolo_origem} {valor:.2f} {nome_origem} em {nome_destino}?")
+    print(f"Resultado: R$ {valor_final:.2f}")
 
 
 # --- 2. Recebendo as Informações do usuário ---
@@ -43,23 +57,29 @@ def conversor_moeda_rb(valor_converter,moeda_conversao,):
 print("Calculadora Conversor de Moeda")
 
 while True:
-    comecar = input("Converter Moedas? S (sim) ou N (não)")
-    if(comecar.upper() == "N"):
+    comecar = input("\nConverter Moedas? S (sim) ou N (não): ")
+    if comecar.upper() == "N":
         print("Encerrando Calculo de conversor...\n")
         break
     else:
         try:
+            # 1. Pede o VALOR e guarda na variável 'valor_usuario'
+            valor_usuario = float(input("Insira o valor a converter: "))
 
-            valor_cnoverter = float(input("Insira o valor a converter: "))
+            print("Moedas disponíveis: 1-Dólar / 2-Euro / 3-Libra / 4-Yuan / 5-Won")
+            
+            # 2. Pede a ORIGEM e guarda na variável 'escolha_origem'
+            escolha_origem = int(input("Moeda de origem (código): "))
 
-            print("Convertemos para: 1 - Dólar Americano / 2 - Euro / 3 - Libra Esterlina / 4 - Yuan Chinês / 5 - Won sul-coreano")
-            moeda_conversao = int(input("Moeda para conversão: "))
+            # 3. Pede o DESTINO e guarda na variável 'escolha_destino'
+            print("Converter para: 1 - Real Brasileiro")
+            escolha_destino = int(input("Moeda de destino (código): "))
 
-            print("Convertemos para: 1 - Real Brasileiro")
-            moeda_convertida_usuario = int(input("Moeda convertida: "))
-
-            # --- 2. Resultado da Conversão ---
-            conversor_moeda_rb(valor_converter,moeda_conversao)
+            # --- CHAMADA DA FUNÇÃO ---
+            # Aqui enviamos as 3 informações que coletamos para a função trabalhar
+            conversor_moeda(valor_usuario, escolha_origem, escolha_destino)
 
         except ValueError:
             print("Ops! Você precisa digitar um número válido.")
+        except KeyError:
+            print("Erro: Código de moeda não encontrado no sistema.")
