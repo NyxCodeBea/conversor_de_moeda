@@ -1,6 +1,6 @@
 # 💱 Conversor de Moedas
 
-![Badge Concluído](http://img.shields.io/static/v1?label=STATUS&message=CONCLUÍDO&color=GREEN&style=for-the-badge)
+![Badge Concluído](http://img.shields.io/static/v1?label=STATUS&message=CONCLUÍDO&color=GREEN&style=for-the-badge) ![Badge Python](http://img.shields.io/static/v1?label=LINGUAGEM&message=PYTHON&color=blue&style=for-the-badge)
 
 Este projeto é um sistema de conversão de moedas via linha de comando (CLI), desenvolvido para praticar lógica de programação, manipulação de dados e estruturação de código em Python.
 
